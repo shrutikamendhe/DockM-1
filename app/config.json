@@ -1,0 +1,434 @@
+{
+  "type": "array",
+  "properties": [
+    {
+      "key": "cluster",
+      "description": "DockM properties",
+      "type": "array",
+      "properties": [
+        {
+          "key": "name",
+          "label": "name",
+          "description": "The name of the DockM cluster",
+          "type": "string",
+          "default": "dockM cluster",
+          "required": "yes"
+        },
+        {
+          "key": "description",
+          "label": "description",
+          "description": "Description DockM cluster",
+          "type": "string",
+          "default": "dockM cluster",
+          "required": "yes"
+        },
+        {
+          "key": "vxnet",
+          "label": "vxnet",
+          "description": "Choose a vxnet to join",
+          "type": "string",
+          "default": "",
+          "required": "yes"
+        },
+        {
+          "key": "master",
+          "label": "master ",
+          "description": "master properties",
+          "type": "array",
+          "properties": [
+			{
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 4,
+              "range": [
+                2,
+                4,
+                8
+              ],
+              "required": "yes"
+            },
+			{
+              "key": "memory",
+              "label": "memory_label",
+              "description": "memory_description",
+              "type": "integer",
+              "default": 2048,
+              "range": [
+                1024,
+                2048,
+                4096,
+                8192,
+                16384,
+                32768,
+                49152,
+                65536
+              ],
+              "required": "yes"
+            },
+			
+			{
+              "key": "count",
+              "label": "count",
+              "description": "Number of master for the cluster to create",
+              "type": "integer",
+              "default": 1,
+              "min": 1,
+              "max": 1,
+              "required": "yes"
+            },
+            {
+              "key": "instance_class",
+              "label": "resource type",
+              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            },
+            
+            {
+              "key": "volume_size",
+              "label": "volume_size_label",
+              "description": "volume_size_description",
+              "type": "integer",
+              "default": 10,
+              "min": 10,
+              "max": 1000,
+              "step": 10,
+              "required": "yes"
+            }
+			   
+          ]
+        },
+		{
+          "key": "node",
+          "label": "node",
+          "description": "node properties",
+          "type": "array",
+          "properties": [
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 4,
+              "range": [
+                2,
+                4,
+                8,
+                12,
+                16
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "memory of each node (in MB)",
+              "type": "integer",
+              "default": 4096,
+              "range": [
+                2048,
+                4096,
+                8192,
+                16384,
+                24576,
+                32768,
+                49152,
+                65536
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "count",
+              "label": "count",
+              "description": "Number of nodes for the cluster to create",
+              "type": "integer",
+              "default": 2,
+              "min":1,
+              "max":1000,
+              "required": "yes"
+            },
+            {
+              "key": "instance_class",
+              "label": "resource type",
+              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "volume_size",
+              "label": "volume size",
+              "description": "The volume size for each instance",
+              "type": "integer",
+              "default": 50,
+              "min": 10,
+              "max": 1000,
+              "step": 10,
+              "required": "yes"
+            }
+          ]
+        },
+		{
+          "key": "log",
+          "label": "log",
+          "description": "log properties",
+          "type": "array",
+          "properties": [
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 4,
+              "range": [
+                2,
+                4,
+                8,
+                16
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "memory of each node (in MB)",
+              "type": "integer",
+              "default": 4096,
+              "range": [
+                2048,
+                4096,
+                8192,
+                16384,
+                32768
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "count",
+              "label": "count",
+              "description": "Number of log nodes for the cluster to create",
+              "type": "integer",
+              "default": 2,
+              "range":[0,2,3,4,5],
+              "required": "yes"
+            },
+            {
+              "key": "instance_class",
+              "label": "resource type",
+              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "volume_size",
+              "label": "volume size",
+              "description": "The volume size for each instance",
+              "type": "integer",
+              "default": 100,
+              "min": 50,
+              "max": 1000,
+              "step": 10,
+              "required": "yes"
+            }
+          ]
+        },
+		 {
+          "key": "client",
+          "label": "client",
+          "description": "client properties",
+          "type": "array",
+          "properties": [
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 1,
+              "range": [
+                1,
+                2
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "memory of each node (in MB)",
+              "type": "integer",
+              "default": 1024,
+              "range": [
+                1024,
+                2048
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "instance_class",
+              "label": "resource type",
+              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            }
+          ]
+        }
+      ]
+    },
+	{
+      "key": "env",
+      "description": "application configuration properties",
+      "type": "array",
+      "properties": [
+        {
+          "key": "access_key_id",
+          "label": "Access key id",
+          "description": "API access key id",
+          "type": "string",
+          "pattern": "^[A-Z]{20}$",
+          "required": "yes"
+        },
+        {
+          "key": "secret_access_key",
+          "label": "Secret access key",
+          "description": "API secret access key",
+          "type": "password",
+          "pattern": "^[A-Za-z0-9]{40}$",
+          "required": "yes"
+        },
+        {
+          "key": "api_external_domain",
+          "label": "Api External Domain",
+          "description": "The domain of the kubernetes api server",
+          "type": "string",
+          "default": "",
+          "changeable": false,
+          "required": "no"
+        },
+        {
+          "key": "registry-mirrors",
+          "label": "Registry mirrors",
+          "description": "The docker hub registry mirror, use a blank to split multi registry",
+          "type": "string",
+          "default": "https://registry.docker-cn.com",
+          "required": "no"
+        },
+        {
+          "key": "insecure-registries",
+          "label": "Insecure registries",
+          "description": "The insecure docker registries, use a blank to split multi registry",
+          "type": "string",
+          "default": "",
+          "required": "no"
+        },
+        {
+          "key": "pod_vxnets",
+          "label": "Pod vxnets",
+          "description": "The vxnets for kubernetes pod, use a blank to split multi vxnet",
+          "type": "string",
+          "changeable": true,
+          "pattern":"^vxnet\\-[a-z0-9]{5,10}(\\svxnet\\-[a-z0-9]{5,10})*$",
+          "required": "yes"
+        },
+        {
+          "key": "dockerhub_username",
+          "label": "Dockerhub Username",
+          "description": "The username of dockerhub.qingcloud.com",
+          "type": "string",
+          "default": "",
+          "changeable": true,
+          "required": "no"
+        },
+        {
+          "key": "enable_hostnic",
+          "label": "enalbe hostnic",
+          "description": "switch to open hostnic",
+          "type": "boolean",
+          "changeable": false,
+          "default": false,
+          "required": "yes"
+        },
+        {
+          "key": "dockerhub_password",
+          "label": "Dockerhub Password",
+          "description": "The password of dockerhub.qingcloud.com user",
+          "type": "password",
+          "default": "",
+          "changeable": true,
+          "required": "no"
+        },
+        {
+          "key": "keep_log_days",
+          "label": "Keep log days",
+          "description": "Keep log on log node for x days, 0 indicates that the log is not cleared",
+          "type": "integer",
+          "default": 3,
+          "min":0,
+          "max":30,
+          "changeable": true,
+          "required": "yes"
+        },
+        {
+          "key": "kube_log_level",
+          "label": "Kubernetes log level",
+          "description": "The log level for kubernetes system",
+          "type": "integer",
+          "default": 0,
+          "min":0,
+          "max":10,
+          "changeable": true,
+          "required": "no"
+        },
+        {
+          "key": "fluent_forward_server",
+          "label": "Fluent forward server",
+          "description": "The fluent log server address to forward server, format host:port",
+          "type": "string",
+          "changeable": true,
+          "default":"",
+          "pattern":"^$|^[^\\:]+:[0-9]{1,5}$",
+          "required": "no"
+        },
+        {
+          "key": "es_server",
+          "label": "Elastic Search server",
+          "description": "The Elastic Search server address, format host:port",
+          "type": "string",
+          "changeable": true,
+          "default":"",
+          "pattern":"^$|^[^\\:]+:[0-9]{1,5}$",
+          "required": "no"
+        },
+        {
+          "key": "enable_istio",
+          "label": "Enable istio",
+          "description": "Enable service mesh platform istio",
+          "type": "string",
+          "changeable": true,
+          "default":"no",
+          "range":["yes", "no"],
+          "required": "no"
+        }
+      ]
+    }
+  ]
+}
