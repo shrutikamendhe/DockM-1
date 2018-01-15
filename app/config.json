@@ -36,7 +36,7 @@
           "description": "master properties",
           "type": "array",
           "properties": [
-			{
+            {
               "key": "cpu",
               "label": "CPU",
               "description": "CPUs of each node",
@@ -49,7 +49,7 @@
               ],
               "required": "yes"
             },
-			{
+            {
               "key": "memory",
               "label": "memory_label",
               "description": "memory_description",
@@ -67,8 +67,7 @@
               ],
               "required": "yes"
             },
-			
-			{
+            {
               "key": "count",
               "label": "count",
               "description": "Number of master for the cluster to create",
@@ -90,7 +89,6 @@
               ],
               "required": "yes"
             },
-            
             {
               "key": "volume_size",
               "label": "volume_size_label",
@@ -102,10 +100,9 @@
               "step": 10,
               "required": "yes"
             }
-			   
           ]
         },
-		{
+        {
           "key": "node",
           "label": "node",
           "description": "node properties",
@@ -150,8 +147,8 @@
               "description": "Number of nodes for the cluster to create",
               "type": "integer",
               "default": 2,
-              "min":1,
-              "max":1000,
+              "min": 1,
+              "max": 1000,
               "required": "yes"
             },
             {
@@ -179,7 +176,7 @@
             }
           ]
         },
-		{
+        {
           "key": "log",
           "label": "log",
           "description": "log properties",
@@ -220,7 +217,13 @@
               "description": "Number of log nodes for the cluster to create",
               "type": "integer",
               "default": 2,
-              "range":[0,2,3,4,5],
+              "range": [
+                0,
+                2,
+                3,
+                4,
+                5
+              ],
               "required": "yes"
             },
             {
@@ -248,7 +251,7 @@
             }
           ]
         },
-		 {
+        {
           "key": "client",
           "label": "client",
           "description": "client properties",
@@ -291,10 +294,54 @@
               "required": "yes"
             }
           ]
+        },
+        {
+          "key": "ca",
+          "label": "ca",
+          "description": "ca properties",
+          "type": "array",
+          "properties": [
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 1,
+              "range": [
+                1,
+                2
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "memory of each node (in MB)",
+              "type": "integer",
+              "default": 1024,
+              "range": [
+                1024,
+                2048
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "instance_class",
+              "label": "resource type",
+              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            }
+          ]
         }
       ]
     },
-	{
+    {
       "key": "env",
       "description": "application configuration properties",
       "type": "array",
@@ -316,15 +363,6 @@
           "required": "yes"
         },
         {
-          "key": "api_external_domain",
-          "label": "Api External Domain",
-          "description": "The domain of the kubernetes api server",
-          "type": "string",
-          "default": "",
-          "changeable": false,
-          "required": "no"
-        },
-        {
           "key": "registry-mirrors",
           "label": "Registry mirrors",
           "description": "The docker hub registry mirror, use a blank to split multi registry",
@@ -339,15 +377,6 @@
           "type": "string",
           "default": "",
           "required": "no"
-        },
-        {
-          "key": "pod_vxnets",
-          "label": "Pod vxnets",
-          "description": "The vxnets for kubernetes pod, use a blank to split multi vxnet",
-          "type": "string",
-          "changeable": true,
-          "pattern":"^vxnet\\-[a-z0-9]{5,10}(\\svxnet\\-[a-z0-9]{5,10})*$",
-          "required": "yes"
         },
         {
           "key": "dockerhub_username",
@@ -382,19 +411,19 @@
           "description": "Keep log on log node for x days, 0 indicates that the log is not cleared",
           "type": "integer",
           "default": 3,
-          "min":0,
-          "max":30,
+          "min": 0,
+          "max": 30,
           "changeable": true,
           "required": "yes"
         },
         {
-          "key": "kube_log_level",
-          "label": "Kubernetes log level",
-          "description": "The log level for kubernetes system",
+          "key": "dockm_log_level",
+          "label": "DockM log level",
+          "description": "The log level for DockM system",
           "type": "integer",
           "default": 0,
-          "min":0,
-          "max":10,
+          "min": 0,
+          "max": 10,
           "changeable": true,
           "required": "no"
         },
@@ -404,8 +433,8 @@
           "description": "The fluent log server address to forward server, format host:port",
           "type": "string",
           "changeable": true,
-          "default":"",
-          "pattern":"^$|^[^\\:]+:[0-9]{1,5}$",
+          "default": "",
+          "pattern": "^$|^[^\\:]+:[0-9]{1,5}$",
           "required": "no"
         },
         {
@@ -414,8 +443,8 @@
           "description": "The Elastic Search server address, format host:port",
           "type": "string",
           "changeable": true,
-          "default":"",
-          "pattern":"^$|^[^\\:]+:[0-9]{1,5}$",
+          "default": "",
+          "pattern": "^$|^[^\\:]+:[0-9]{1,5}$",
           "required": "no"
         },
         {
@@ -424,8 +453,11 @@
           "description": "Enable service mesh platform istio",
           "type": "string",
           "changeable": true,
-          "default":"no",
-          "range":["yes", "no"],
+          "default": "no",
+          "range": [
+            "yes",
+            "no"
+          ],
           "required": "no"
         }
       ]
