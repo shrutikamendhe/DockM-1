@@ -3,6 +3,12 @@
 SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
 DOCKM_HOME=$(dirname "${SCRIPTPATH}")
 
+pushd $DOCKM_HOME
+wget -O /opt/dockm/script/common.sh https://raw.githubusercontent.com/shrutikamendhe/DockM-QingCloud/dev/script/common.sh
+wget -O /opt/dockm/script/create-ca-server.sh https://raw.githubusercontent.com/shrutikamendhe/DockM-QingCloud/dev/script/create-ca-server.sh;
+chmod +x /opt/dockm/script/*
+popd
+
 source "${DOCKM_HOME}/script/common.sh"
 source "${DOCKM_HOME}/script/create-ca-server.sh"
 
