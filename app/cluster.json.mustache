@@ -223,13 +223,13 @@
       "services": {
         "init": {
           "order": 1,
-          "cmd": "mkdir -p /opt/dockm/script; wget -O /opt/dockm/script/init-ca.sh https://raw.githubusercontent.com/shrutikamendhe/DockM-QingCloud/dev/script/init-ca.sh; chmod +x /opt/dockm/script/*; /opt/dockm/script/init-ca.sh",
+          "cmd": "mkdir -p /opt/dockm/script; wget -O /opt/dockm/script/init-ca.sh https://raw.githubusercontent.com/shrutikamendhe/DockM-QingCloud/dev/script/init-ca.sh; chmod +x /opt/dockm/script/*; /opt/dockm/script/init-ca.sh"
         },
         "upgrade": {
           "cmd": "docker"
         }
       }
-    }
+    },
     {
       "role": "log",
       "container": {
