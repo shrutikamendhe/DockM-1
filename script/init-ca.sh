@@ -13,5 +13,6 @@ cluster_conf_file="${DOCKM_HOME}/cluster-info"
 
 while IFS=: read -r f1 f2
 do
-	create_node_certificate $f1
+    create_node_certificate $f1
+    install_key $f1 "ubuntu"
 done < "$cluster_conf_file"

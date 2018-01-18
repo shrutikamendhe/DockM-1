@@ -8,7 +8,7 @@
       "container": {
         "type": "kvm",
         "zone": "pek3a",
-        "image": "img-9yjvu1j3"
+        "image": "img-o2pckaja"
       },
       "instance_class": {{cluster.master.instance_class}},
       "count": {{cluster.master.count}},
@@ -96,7 +96,7 @@
       "role": "node",
       "container": {
         "type": "kvm",
-        "image": "img-9yjvu1j3",
+        "image": "img-o2pckaja",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.node.instance_class}},
@@ -191,7 +191,7 @@
       "role": "client",
       "container": {
         "type": "kvm",
-        "image": "img-9yjvu1j3",
+        "image": "img-o2pckaja",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.client.instance_class}},
@@ -213,7 +213,7 @@
       "role": "ca",
       "container": {
         "type": "kvm",
-        "image": "img-9yjvu1j3",
+        "image": "img-o2pckaja",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.ca.instance_class}},
@@ -223,7 +223,7 @@
       "services": {
         "init": {
           "order": 1,
-          "cmd": "mkdir -p /opt/dockm/script; wget -O /opt/dockm/script/init-ca.sh https://raw.githubusercontent.com/shrutikamendhe/DockM-QingCloud/dev/script/init-ca.sh; chmod +x /opt/dockm/script/*; /opt/dockm/script/init-ca.sh"
+          "cmd": "/opt/dockm/script/init-ca.sh"
         },
         "upgrade": {
           "cmd": "docker"
@@ -234,7 +234,7 @@
       "role": "log",
       "container": {
         "type": "kvm",
-        "image": "img-9yjvu1j3",
+        "image": "img-o2pckaja",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.log.instance_class}},
