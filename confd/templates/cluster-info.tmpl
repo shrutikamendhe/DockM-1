@@ -1,0 +1,6 @@
+{{range $dir := lsdir "/hosts/master/"}}{{$ip := printf "/hosts/master/%s/ip" $dir}} {{$role := printf "/hosts/master/%s/role" $dir}}
+{{getv $ip}} {{$dir}} {{getv $role}} {{end}}
+{{range $dir := lsdir "/hosts/node/"}}{{$ip := printf "/hosts/node/%s/ip" $dir}} {{$role := printf "/hosts/node/%s/role" $dir}}
+{{getv $ip}} {{$dir}} {{getv $role}} {{end}}
+{{range $dir := lsdir "/hosts/client/"}}{{$ip := printf "/hosts/client/%s/ip" $dir}} {{$role:= printf "/hosts/client/%s/role" $dir}}
+{{getv $ip}} {{$dir}} {{getv $role}}{{end}}

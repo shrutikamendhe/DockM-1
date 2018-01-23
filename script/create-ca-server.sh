@@ -1,10 +1,11 @@
-#! /bin/bash
+#!/bin/bash
 
 SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
 DOCKM_HOME=$(dirname "${SCRIPTPATH}")
 
 source "${DOCKM_HOME}/script/common.sh"
 
+HOME="/home/ubuntu"
 CERT_FOLDER="${HOME}/.certs"
 
 function cert_folder {
@@ -26,8 +27,8 @@ function create_public_key {
     openssl rsa -in $1-priv-key.pem -out $1-priv-key.pem &>/dev/null
 }
 
-function create_ca_server {
-    pushd $CERT_FOLDER
+function create_ca_server { 
+    pushd $CERT_FOLDER &>/dev/null
 
     # Create a private key called 'ca-priv-key.pem' for the CA
     create_priv_key "ca"
@@ -37,11 +38,11 @@ function create_ca_server {
     # Create a public key called 'ca.pem' for the CA.
     openssl req -config /usr/lib/ssl/openssl.cnf -new -key ca-priv-key.pem -x509 -days 1825 -out ca.pem -subj "/C=US/ST=CA/L=San Francisco/O=Docker Inc/OU=Sales/CN=${HOSTNAME}" &>/dev/null
 
-    popd
+    popd &>/dev/null
 }
 
 function create_node_certificate {
-    pushd $CERT_FOLDER
+    pushd $CERT_FOLDER &>/dev/null
 
     # Create a private
     create_priv_key $1
@@ -52,16 +53,13 @@ function create_node_certificate {
     # Create the certificate *-cert.pem based on the CSR .
     create_public_key $1
     
-    popd
+    popd &>/dev/null
 }
 
 function install_key {
-    
-    #ssh -i ${HOME}/.ssh/id_rsa $2@$1 'mkdir -p ${HOME}/.certs' &>/dev/null
-
-    scp -i ${HOME}/.ssh/id_rsa ${HOME}/cert/ca.pem $2@$1:${HOME}/.certs/ca.pem &>/dev/null
-    scp -i ${HOME}/.ssh/id_rsa ${HOME}/cert/$1-cert.pem $2@$1:${HOME}/.certs/cert.pem &>/dev/null
-    scp -i ${HOME}/.ssh/id_rsa ${HOME}/cert/$1-priv-key.pem $2@$1:${HOME}/.certs/key.pem &>/dev/null
+    scp -i ${HOME}/.ssh/id_rsa ${CERT_FOLDER}/ca.pem $2@$1:${CERT_FOLDER}/ca.pem &>/dev/null
+    scp -i ${HOME}/.ssh/id_rsa ${CERT_FOLDER}/$1-cert.pem $2@$1:${CERT_FOLDER}/cert.pem &>/dev/null
+    scp -i ${HOME}/.ssh/id_rsa ${CERT_FOLDER}/$1-priv-key.pem $2@$1:${CERT_FOLDER}/key.pem &>/dev/null
 }
 
 # Create certificate folder on start of script

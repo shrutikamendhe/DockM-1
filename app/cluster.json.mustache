@@ -8,7 +8,7 @@
       "container": {
         "type": "kvm",
         "zone": "pek3a",
-        "image": "img-o2pckaja"
+        "image": "img-9spdlqhl"
       },
       "instance_class": {{cluster.master.instance_class}},
       "count": {{cluster.master.count}},
@@ -23,33 +23,33 @@
       "services": {
         "init": {
           "order": 1,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         },
         "start": {
           "order": 1,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         },
         "stop": {
           "order": 1,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         },
         "destroy": {
           "order": 3,
           "nodes_to_execute_on": 1,
           "post_stop_service": true,
-          "cmd": "docker"
+          "cmd": "pwd"
         },
         "upgrade": {
-          "cmd": "docker",
+          "cmd": "pwd",
           "post_start_service": true,
           "timeout": 300
         }
       },
       "custom_metadata": {
-        "cmd": "docker"
+        "cmd": "pwd"
       },
       "health_check": {
         "enable": true,
@@ -58,12 +58,12 @@
         "action_timeout_sec": 30,
         "healthy_threshold": 3,
         "unhealthy_threshold": 3,
-        "check_cmd": "docker",
-        "action_cmd": "docker"
+        "check_cmd": "pwd",
+        "action_cmd": "pwd"
       },
       "monitor": {
         "enable": true,
-        "cmd": "docker",
+        "cmd": "pwd",
         "items": {
           "docker_running_container_count": {
             "unit": "",
@@ -96,7 +96,7 @@
       "role": "node",
       "container": {
         "type": "kvm",
-        "image": "img-o2pckaja",
+        "image": "img-9spdlqhl",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.node.instance_class}},
@@ -112,34 +112,30 @@
       "vertical_scaling_policy": "sequential",
       "services": {
         "init": {
-          "order": 1,
-          "cmd": "docker",
-          "timeout": 300
+          "cmd": "/opt/dockm/script/init-node.sh"
         },
         "start": {
-          "order": 3,
-          "cmd": "docker",
-          "timeout": 300
+          "cmd": "/opt/dockm/script/start-node.sh"
         },
         "stop": {
           "order": 3,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         },
         "scale_in": {
           "nodes_to_execute_on": 1,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 86400
         },
         "destroy": {
           "order": 1,
           "nodes_to_execute_on": 1,
           "post_stop_service": false,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 86400
         },
         "upgrade": {
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         }
       },
@@ -150,12 +146,12 @@
         "action_timeout_sec": 30,
         "healthy_threshold": 3,
         "unhealthy_threshold": 3,
-        "check_cmd": "docker",
-        "action_cmd": "docker"
+        "check_cmd": "pwd",
+        "action_cmd": "pwd"
       },
       "monitor": {
         "enable": true,
-        "cmd": "docker",
+        "cmd": "pwd",
         "items": {
           "docker_running_container_count": {
             "unit": "",
@@ -191,7 +187,7 @@
       "role": "client",
       "container": {
         "type": "kvm",
-        "image": "img-o2pckaja",
+        "image": "img-9spdlqhl",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.client.instance_class}},
@@ -202,10 +198,10 @@
       "services": {
         "init": {
           "order": 2,
-          "cmd": "docker"
+          "cmd": "pwd"
         },
         "upgrade": {
-          "cmd": "docker"
+          "cmd": "pwd"
         }
       }
     },
@@ -213,7 +209,7 @@
       "role": "ca",
       "container": {
         "type": "kvm",
-        "image": "img-o2pckaja",
+        "image": "img-9spdlqhl",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.ca.instance_class}},
@@ -222,11 +218,10 @@
       "memory": {{cluster.ca.memory}},
       "services": {
         "init": {
-          "order": 1,
           "cmd": "/opt/dockm/script/init-ca.sh"
         },
-        "upgrade": {
-          "cmd": "docker"
+        "start": {
+          "cmd": "pwd"
         }
       }
     },
@@ -234,7 +229,7 @@
       "role": "log",
       "container": {
         "type": "kvm",
-        "image": "img-o2pckaja",
+        "image": "img-9spdlqhl",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.log.instance_class}},
@@ -251,33 +246,33 @@
       "services": {
         "init": {
           "order": 1,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         },
         "start": {
           "order": 2,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         },
         "stop": {
           "order": 2,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         },
         "scale_in": {
           "nodes_to_execute_on": 1,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 86400
         },
         "destroy": {
           "order": 2,
           "nodes_to_execute_on": 1,
           "post_stop_service": false,
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 86400
         },
         "upgrade": {
-          "cmd": "docker",
+          "cmd": "pwd",
           "timeout": 300
         }
       },
@@ -288,12 +283,12 @@
         "action_timeout_sec": 30,
         "healthy_threshold": 3,
         "unhealthy_threshold": 3,
-        "check_cmd": "docker",
-        "action_cmd": "docker"
+        "check_cmd": "pwd",
+        "action_cmd": "pwd"
       },
       "monitor": {
         "enable": true,
-        "cmd": "docker",
+        "cmd": "pwd",
         "items": {
           "kubelet_running_container_count": {
             "unit": "",
