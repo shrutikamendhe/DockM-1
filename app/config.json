@@ -8,32 +8,32 @@
       "properties": [
         {
           "key": "name",
-          "label": "name",
+          "label": "Name",
           "description": "The name of the DockM cluster",
           "type": "string",
-          "default": "dockM cluster",
+          "default": "DockM cluster",
           "required": "yes"
         },
         {
           "key": "description",
-          "label": "description",
-          "description": "Description DockM cluster",
+          "label": "Description",
+          "description": "The description of DockM cluster",
           "type": "string",
-          "default": "dockM cluster",
+          "default": "DockM cluster",
           "required": "yes"
         },
         {
           "key": "vxnet",
-          "label": "vxnet",
-          "description": "Choose a vxnet to join",
+          "label": "VxNet",
+          "description": "Choose a VxNet to join",
           "type": "string",
           "default": "",
           "required": "yes"
         },
         {
           "key": "master",
-          "label": "master ",
-          "description": "master properties",
+          "label": "Master",
+          "description": "Swarm master properties",
           "type": "array",
           "properties": [
             {
@@ -51,8 +51,8 @@
             },
             {
               "key": "memory",
-              "label": "memory_label",
-              "description": "memory_description",
+              "label": "Memory",
+              "description": "Memory of swarm master (in GB)",
               "type": "integer",
               "default": 2048,
               "range": [
@@ -69,7 +69,7 @@
             },
             {
               "key": "count",
-              "label": "count",
+              "label": "Count",
               "description": "Number of master for the cluster to create",
               "type": "integer",
               "default": 1,
@@ -79,7 +79,7 @@
             },
             {
               "key": "instance_class",
-              "label": "resource type",
+              "label": "Resource type",
               "description": "The instance type for the cluster to run, such as high performance, high performance plus",
               "type": "integer",
               "default": 0,
@@ -91,8 +91,8 @@
             },
             {
               "key": "volume_size",
-              "label": "volume_size_label",
-              "description": "volume_size_description",
+              "label": "Volume size",
+              "description": "The volume size for each instance",
               "type": "integer",
               "default": 10,
               "min": 10,
@@ -104,8 +104,8 @@
         },
         {
           "key": "node",
-          "label": "node",
-          "description": "node properties",
+          "label": "Node",
+          "description": "Node properties",
           "type": "array",
           "properties": [
             {
@@ -126,7 +126,7 @@
             {
               "key": "memory",
               "label": "Memory",
-              "description": "memory of each node (in MB)",
+              "description": "Memory of each node (in GB)",
               "type": "integer",
               "default": 4096,
               "range": [
@@ -143,7 +143,7 @@
             },
             {
               "key": "count",
-              "label": "count",
+              "label": "Count",
               "description": "Number of nodes for the cluster to create",
               "type": "integer",
               "default": 2,
@@ -153,7 +153,7 @@
             },
             {
               "key": "instance_class",
-              "label": "resource type",
+              "label": "Resource type",
               "description": "The instance type for the cluster to run, such as high performance, high performance plus",
               "type": "integer",
               "default": 0,
@@ -165,10 +165,10 @@
             },
             {
               "key": "volume_size",
-              "label": "volume size",
+              "label": "Volume size",
               "description": "The volume size for each instance",
               "type": "integer",
-              "default": 50,
+              "default": 10,
               "min": 10,
               "max": 1000,
               "step": 10,
@@ -178,8 +178,8 @@
         },
         {
           "key": "log",
-          "label": "log",
-          "description": "log properties",
+          "label": "Log",
+          "description": "Log properties",
           "type": "array",
           "properties": [
             {
@@ -199,7 +199,7 @@
             {
               "key": "memory",
               "label": "Memory",
-              "description": "memory of each node (in MB)",
+              "description": "Memory of each node (in GB)",
               "type": "integer",
               "default": 4096,
               "range": [
@@ -213,7 +213,7 @@
             },
             {
               "key": "count",
-              "label": "count",
+              "label": "Count",
               "description": "Number of log nodes for the cluster to create",
               "type": "integer",
               "default": 2,
@@ -228,7 +228,7 @@
             },
             {
               "key": "instance_class",
-              "label": "resource type",
+              "label": "Resource type",
               "description": "The instance type for the cluster to run, such as high performance, high performance plus",
               "type": "integer",
               "default": 0,
@@ -240,11 +240,11 @@
             },
             {
               "key": "volume_size",
-              "label": "volume size",
+              "label": "Volume size",
               "description": "The volume size for each instance",
               "type": "integer",
-              "default": 100,
-              "min": 50,
+              "default": 10,
+              "min": 10,
               "max": 1000,
               "step": 10,
               "required": "yes"
@@ -253,8 +253,8 @@
         },
         {
           "key": "client",
-          "label": "client",
-          "description": "client properties",
+          "label": "Client",
+          "description": "Client properties",
           "type": "array",
           "properties": [
             {
@@ -272,7 +272,7 @@
             {
               "key": "memory",
               "label": "Memory",
-              "description": "memory of each node (in MB)",
+              "description": "Memory of each node (in GB)",
               "type": "integer",
               "default": 1024,
               "range": [
@@ -283,51 +283,7 @@
             },
             {
               "key": "instance_class",
-              "label": "resource type",
-              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
-              "type": "integer",
-              "default": 0,
-              "range": [
-                0,
-                1
-              ],
-              "required": "yes"
-            }
-          ]
-        },
-        {
-          "key": "ca",
-          "label": "ca",
-          "description": "ca properties",
-          "type": "array",
-          "properties": [
-            {
-              "key": "cpu",
-              "label": "CPU",
-              "description": "CPUs of each node",
-              "type": "integer",
-              "default": 1,
-              "range": [
-                1,
-                2
-              ],
-              "required": "yes"
-            },
-            {
-              "key": "memory",
-              "label": "Memory",
-              "description": "memory of each node (in MB)",
-              "type": "integer",
-              "default": 1024,
-              "range": [
-                1024,
-                2048
-              ],
-              "required": "yes"
-            },
-            {
-              "key": "instance_class",
-              "label": "resource type",
+              "label": "Resource type",
               "description": "The instance type for the cluster to run, such as high performance, high performance plus",
               "type": "integer",
               "default": 0,
@@ -348,8 +304,8 @@
       "properties": [
         {
           "key": "access_key_id",
-          "label": "Access key id",
-          "description": "API access key id",
+          "label": "Access key ID",
+          "description": "API access key ID",
           "type": "string",
           "pattern": "^[A-Z]{20}$",
           "required": "yes"
@@ -389,8 +345,8 @@
         },
         {
           "key": "enable_hostnic",
-          "label": "enalbe hostnic",
-          "description": "switch to open hostnic",
+          "label": "Enable host nic",
+          "description": "Switch to open host nic",
           "type": "boolean",
           "changeable": false,
           "default": false,
@@ -398,7 +354,7 @@
         },
         {
           "key": "dockerhub_password",
-          "label": "Dockerhub Password",
+          "label": "Docker hub Password",
           "description": "The password of dockerhub.qingcloud.com user",
           "type": "password",
           "default": "",

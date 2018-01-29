@@ -8,7 +8,7 @@
       "container": {
         "type": "kvm",
         "zone": "pek3a",
-        "image": "img-9spdlqhl"
+        "image": "img-qxljpvtk"
       },
       "instance_class": {{cluster.master.instance_class}},
       "count": {{cluster.master.count}},
@@ -22,30 +22,22 @@
       },
       "services": {
         "init": {
-          "order": 1,
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "/opt/dockm/script/init-master.sh"
         },
         "start": {
-          "order": 1,
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         },
         "stop": {
-          "order": 1,
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         },
         "destroy": {
-          "order": 3,
           "nodes_to_execute_on": 1,
           "post_stop_service": true,
           "cmd": "pwd"
         },
         "upgrade": {
           "cmd": "pwd",
-          "post_start_service": true,
-          "timeout": 300
+          "post_start_service": true
         }
       },
       "custom_metadata": {
@@ -96,7 +88,7 @@
       "role": "node",
       "container": {
         "type": "kvm",
-        "image": "img-9spdlqhl",
+        "image": "img-qxljpvtk",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.node.instance_class}},
@@ -119,8 +111,7 @@
         },
         "stop": {
           "order": 3,
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         },
         "scale_in": {
           "nodes_to_execute_on": 1,
@@ -135,8 +126,7 @@
           "timeout": 86400
         },
         "upgrade": {
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         }
       },
       "health_check": {
@@ -187,7 +177,7 @@
       "role": "client",
       "container": {
         "type": "kvm",
-        "image": "img-9spdlqhl",
+        "image": "img-qxljpvtk",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.client.instance_class}},
@@ -206,30 +196,10 @@
       }
     },
     {
-      "role": "ca",
-      "container": {
-        "type": "kvm",
-        "image": "img-9spdlqhl",
-        "zone": "pek3a"
-      },
-      "instance_class": {{cluster.ca.instance_class}},
-      "count": 1,
-      "cpu": {{cluster.ca.cpu}},
-      "memory": {{cluster.ca.memory}},
-      "services": {
-        "init": {
-          "cmd": "/opt/dockm/script/init-ca.sh"
-        },
-        "start": {
-          "cmd": "pwd"
-        }
-      }
-    },
-    {
       "role": "log",
       "container": {
         "type": "kvm",
-        "image": "img-9spdlqhl",
+        "image": "img-qxljpvtk",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.log.instance_class}},
@@ -246,18 +216,15 @@
       "services": {
         "init": {
           "order": 1,
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         },
         "start": {
           "order": 2,
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         },
         "stop": {
           "order": 2,
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         },
         "scale_in": {
           "nodes_to_execute_on": 1,
@@ -272,8 +239,7 @@
           "timeout": 86400
         },
         "upgrade": {
-          "cmd": "pwd",
-          "timeout": 300
+          "cmd": "pwd"
         }
       },
       "health_check": {
@@ -290,13 +256,13 @@
         "enable": true,
         "cmd": "pwd",
         "items": {
-          "kubelet_running_container_count": {
+          "docker_running_container_count": {
             "unit": "",
             "value_type": "int",
             "statistics_type": "latest",
             "scale_factor_when_display": 0.001
           },
-          "kubelet_running_pod_count": {
+          "docker_running_pod_count": {
             "unit": "",
             "value_type": "int",
             "statistics_type": "latest",
@@ -304,16 +270,16 @@
           }
         },
         "groups": {
-          "kubelet": [
-            "kubelet_running_pod_count",
-            "kubelet_running_container_count"
+          "docker": [
+            "docker_running_pod_count",
+            "docker_running_container_count"
           ]
         },
         "display": [
-          "kubelet"
+          "docker"
         ],
         "alarm": [
-          "kubelet_running_container_count"
+          "docker_running_container_count"
         ]
       }
     }

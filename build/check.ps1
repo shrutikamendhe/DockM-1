@@ -1,6 +1,6 @@
-$Token = "aXsGdwTcw0wOulmBAmYTnYRWrU8T0VFQ" # Update the value of token everyday 
-$SK = "z5fckeFEHCoHzo3WLbIssbtQjKgtZilx" # Update the value everyday
-$AppVersionID = "appv-1x1m6ujk"
+$SK = "CDQYnpg3CUC0oVaR9CTKMJtf7rYiQ5U1" # Update the value everyday
+$AppVersionID = "appv-1ji83rdf"
+$Token = "aXsGdwTcw0wOulmBAmYTnYRWrU8T0VFQ" 
 
 [System.Uri]$Uri = "https://appcenter.qingcloud.com/api/" # Add the Uri
 $Method = 'POST'
@@ -37,7 +37,8 @@ $boundary = [System.Guid]::NewGuid().ToString()
 # Linefeed character
 $LF = "`r`n"
 
-$fileName = $AppVersionID +".zip"
+#$fileName = $AppVersionID +".zip"
+$fileName = ((Get-Date).tostring("dd-MM-yyyy-hh-mm-ss")+".zip")
 $zipfilename = $PWD.Path + "\"+ $fileName
 function ZipAppFolder {
     $sourcedir = ".\app"
@@ -45,13 +46,20 @@ function ZipAppFolder {
         Remove-Item -Path $zipfilename
     }
     Add-Type -Assembly System.IO.Compression.FileSystem
-    #$compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal
-    #[System.IO.Compression.ZipFile]::CreateFromDirectory($sourcedir,$zipfilename, $compressionLevel, $false)
-    [System.IO.Compression.ZipFile]::CreateFromDirectory($sourcedir,$zipfilename)
+    $compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal
+    [System.IO.Compression.ZipFile]::CreateFromDirectory($sourcedir,$zipfilename, $compressionLevel, $false)
+}
+
+function ZipAppFolderusing7Zip {
+    $app = 'C:\Program Files\7-Zip\7z.exe'
+    $arg1 = 'a'
+    $arg2 = '-tzip'
+    $folderLocation = '"..\app\*"'
+    & $app $arg1 $arg2 $arg3 $zipFileName $folderLocation
 }
 
 # Create the Zip of App folder
-#ZipAppFolder
+ZipAppFolderusing7Zip
 $AttachmentContent = [Convert]::ToBase64String([IO.File]::ReadAllBytes($zipfilename))
 #[IO.File]::WriteAllBytes($zipfilename, [Convert]::FromBase64String($AttachmentContent))
 

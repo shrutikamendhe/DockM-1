@@ -5,4 +5,4 @@ DOCKM_HOME=$(dirname "${SCRIPTPATH}")
 
 source "${DOCKM_HOME}/script/common.sh"
 
-log_info "Running start node script"
+log_info "Start node"
