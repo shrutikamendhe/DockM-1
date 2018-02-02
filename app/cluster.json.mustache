@@ -8,7 +8,7 @@
       "container": {
         "type": "kvm",
         "zone": "pek3a",
-        "image": "img-qxljpvtk"
+        "image": "img-6r23ionf"
       },
       "instance_class": {{cluster.master.instance_class}},
       "count": {{cluster.master.count}},
@@ -25,7 +25,7 @@
           "cmd": "/opt/dockm/script/init-master.sh"
         },
         "start": {
-          "cmd": "pwd"
+          "cmd": "/opt/dockm/script/start-master.sh"
         },
         "stop": {
           "cmd": "pwd"
@@ -33,7 +33,7 @@
         "destroy": {
           "nodes_to_execute_on": 1,
           "post_stop_service": true,
-          "cmd": "pwd"
+          "cmd": "/opt/dockm/script/destroy-master.sh"
         },
         "upgrade": {
           "cmd": "pwd",
@@ -50,8 +50,8 @@
         "action_timeout_sec": 30,
         "healthy_threshold": 3,
         "unhealthy_threshold": 3,
-        "check_cmd": "pwd",
-        "action_cmd": "pwd"
+        "check_cmd": "/opt/dockm/script/check-master.sh",
+        "action_cmd": "/opt/dockm/script/restart-master.sh"
       },
       "monitor": {
         "enable": true,
@@ -63,7 +63,7 @@
             "statistics_type": "latest",
             "scale_factor_when_display": 0.001
           },
-          "docker_running_pod_count": {
+          "docker_running_service_count": {
             "unit": "",
             "value_type": "int",
             "statistics_type": "latest",
@@ -72,7 +72,7 @@
         },
         "groups": {
           "docker": [
-            "docker_running_pod_count",
+            "docker_running_service_count",
             "docker_running_container_count"
           ]
         },
@@ -88,7 +88,7 @@
       "role": "node",
       "container": {
         "type": "kvm",
-        "image": "img-qxljpvtk",
+        "image": "img-6r23ionf",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.node.instance_class}},
@@ -119,11 +119,9 @@
           "timeout": 86400
         },
         "destroy": {
-          "order": 1,
           "nodes_to_execute_on": 1,
           "post_stop_service": false,
-          "cmd": "pwd",
-          "timeout": 86400
+          "cmd": "/opt/dockm/script/destroy-node.sh"
         },
         "upgrade": {
           "cmd": "pwd"
@@ -136,8 +134,8 @@
         "action_timeout_sec": 30,
         "healthy_threshold": 3,
         "unhealthy_threshold": 3,
-        "check_cmd": "pwd",
-        "action_cmd": "pwd"
+        "check_cmd": "/opt/dockm/script/check-node.sh",
+        "action_cmd": "/opt/dockm/script/restart-node.sh"
       },
       "monitor": {
         "enable": true,
@@ -149,7 +147,7 @@
             "statistics_type": "latest",
             "scale_factor_when_display": 0.001
           },
-          "docker_running_pod_count": {
+          "docker_running_service_count": {
             "unit": "",
             "value_type": "int",
             "statistics_type": "latest",
@@ -158,7 +156,7 @@
         },
         "groups": {
           "docker": [
-            "docker_running_pod_count",
+            "docker_running_service_count",
             "docker_running_container_count"
           ]
         },
@@ -172,130 +170,10 @@
       "advanced_actions": [
         "scale_horizontal"
       ]
-    },
-    {
-      "role": "client",
-      "container": {
-        "type": "kvm",
-        "image": "img-qxljpvtk",
-        "zone": "pek3a"
-      },
-      "instance_class": {{cluster.client.instance_class}},
-      "count": 1,
-      "cpu": {{cluster.client.cpu}},
-      "memory": {{cluster.client.memory}},
-      "user_access": true,
-      "services": {
-        "init": {
-          "order": 2,
-          "cmd": "pwd"
-        },
-        "upgrade": {
-          "cmd": "pwd"
-        }
-      }
-    },
-    {
-      "role": "log",
-      "container": {
-        "type": "kvm",
-        "image": "img-qxljpvtk",
-        "zone": "pek3a"
-      },
-      "instance_class": {{cluster.log.instance_class}},
-      "count": {{cluster.log.count}},
-      "cpu": {{cluster.log.cpu}},
-      "memory": {{cluster.log.memory}},
-      "volume": {
-        "size": {{cluster.log.volume_size}},
-        "mount_point": "/data",
-        "mount_options": "defaults,noatime",
-        "filesystem": "ext4"
-      },
-      "vertical_scaling_policy": "sequential",
-      "services": {
-        "init": {
-          "order": 1,
-          "cmd": "pwd"
-        },
-        "start": {
-          "order": 2,
-          "cmd": "pwd"
-        },
-        "stop": {
-          "order": 2,
-          "cmd": "pwd"
-        },
-        "scale_in": {
-          "nodes_to_execute_on": 1,
-          "cmd": "pwd",
-          "timeout": 86400
-        },
-        "destroy": {
-          "order": 2,
-          "nodes_to_execute_on": 1,
-          "post_stop_service": false,
-          "cmd": "pwd",
-          "timeout": 86400
-        },
-        "upgrade": {
-          "cmd": "pwd"
-        }
-      },
-      "health_check": {
-        "enable": true,
-        "interval_sec": 60,
-        "timeout_sec": 10,
-        "action_timeout_sec": 30,
-        "healthy_threshold": 3,
-        "unhealthy_threshold": 3,
-        "check_cmd": "pwd",
-        "action_cmd": "pwd"
-      },
-      "monitor": {
-        "enable": true,
-        "cmd": "pwd",
-        "items": {
-          "docker_running_container_count": {
-            "unit": "",
-            "value_type": "int",
-            "statistics_type": "latest",
-            "scale_factor_when_display": 0.001
-          },
-          "docker_running_pod_count": {
-            "unit": "",
-            "value_type": "int",
-            "statistics_type": "latest",
-            "scale_factor_when_display": 0.001
-          }
-        },
-        "groups": {
-          "docker": [
-            "docker_running_pod_count",
-            "docker_running_container_count"
-          ]
-        },
-        "display": [
-          "docker"
-        ],
-        "alarm": [
-          "docker_running_container_count"
-        ]
-      }
     }
   ],
   "env": {
     "access_key_id": {{env.access_key_id}},
-    "secret_access_key": {{env.secret_access_key}},
-    "insecure-registries": {{env.insecure-registries}},
-    "registry-mirrors": {{env.registry-mirrors}},
-    "dockerhub_username": {{env.dockerhub_username}},
-    "dockerhub_password": {{env.dockerhub_password}},
-    "keep_log_days": {{env.keep_log_days}},
-    "dockm_log_level": {{env.dockm_log_level}},
-    "fluent_forward_server": {{env.fluent_forward_server}},
-    "enable_istio": {{env.enable_istio}},
-    "enable_hostnic": {{env.enable_hostnic}},
-    "es_server": {{env.es_server}}
+    "secret_access_key": {{env.secret_access_key}}
   }
 }

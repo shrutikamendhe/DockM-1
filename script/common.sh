@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CLUSTER_INFO="${DOCKM_HOME}/cluster-info"
+
 LOG_FILE="/logs/cluster_logs"
 mkdir -p "$(dirname "$LOG_FILE")"
 touch "$LOG_FILE"
@@ -64,4 +66,39 @@ function docker_active(){
 
 function docker_leave_swarm(){
     retry docker swarm leave --force
+}
+
+function check_docker_master(){
+    if [  -f "${CLUSTER_INFO}" ]; then
+        while IFS=' ' read -r f1 f2 f3; do
+            if [ "${f3}" = "master" ]; then
+                if [ ! -z "${f2// }" ]; then
+                    status=$(docker node inspect --format "{{ .$1.$2  }}" $f2)
+                    echo $status
+                else
+                    break
+                fi
+            fi
+        done < "$CLUSTER_INFO"
+   fi
+}
+
+SSH_FOLDER="/home/ubuntu/.ssh/"
+function check_docker_node(){
+    if [  -f "${CLUSTER_INFO}" ]; then
+        while IFS=' ' read -r f1 f2 f3; do
+            if [ "${f3}" = "node" ]; then
+                if [ ! -z "${f2// }" ]; then
+                    status=$(ssh -i ${SSH_FOLDER}/id_rsa ubuntu@master "docker node inspect --format '{{ .$1.$2  }}' $f2")
+                    echo $status
+                else
+                    break
+                fi
+            fi
+        done < "$CLUSTER_INFO"
+    fi
+}
+
+function clean(){
+    rm -rf /opt/dockm/image
 }
