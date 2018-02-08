@@ -34,6 +34,15 @@ function docker_init_swarm(){
     retry docker swarm init --cert-expiry ${CERT_EXPIRY} &>/dev/null
 }
 
+
+function run_prometheus_service(){
+docker service create --replicas 1 --name my-prometheus \
+    --mount type=bind,source=/etc/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
+    --publish published=9090,target=9090,protocol=tcp \
+    --constraint 'node.role == manager' \
+    prom/prometheus
+}
+
 log_info "Starting docker engine"
 docker_start
 
@@ -49,6 +58,9 @@ check_dockm_image
 
 log_info "Running DockM Image"
 run_dockm_image
+
+log_info "Run prometheus service"
+run_prometheus_service
 
 clean
 log_info "Exiting start script"

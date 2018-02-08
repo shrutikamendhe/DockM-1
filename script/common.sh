@@ -60,6 +60,17 @@ function docker_restart () {
     chmod 666 /var/run/docker.sock
 }
 
+function docker_stop_rm_all () {
+    for i in "docker ps -q"
+    do
+        docker stop $i;
+    done
+    for i in "docker ps -aq"
+    do
+        docker rm -f $i;
+    done
+}
+
 function docker_active(){
     systemctl is-active docker
 }
