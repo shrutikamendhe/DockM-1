@@ -177,29 +177,7 @@
           ]
         }
       ]
-    },
-    {
-      "key": "env",
-      "description": "application configuration properties",
-      "type": "array",
-      "properties": [
-        {
-          "key": "access_key_id",
-          "label": "Access key ID",
-          "description": "API access key ID",
-          "type": "password",
-          "pattern": "^[A-Z]{20}$",
-          "required": "yes"
-        },
-        {
-          "key": "secret_access_key",
-          "label": "Secret access key",
-          "description": "API secret access key",
-          "type": "password",
-          "pattern": "^[A-Za-z0-9]{40}$",
-          "required": "yes"
-        }
-      ]
     }
+ 
   ]
 }

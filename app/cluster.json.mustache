@@ -8,7 +8,7 @@
       "container": {
         "type": "kvm",
         "zone": "pek3a",
-        "image": "img-wp5arg70"
+        "image": "img-8d9k2dw1"
       },
       "instance_class": {{cluster.master.instance_class}},
       "count": {{cluster.master.count}},
@@ -22,18 +22,26 @@
       },
       "services": {
         "init": {
-          "cmd": "/opt/dockm/script/init-master.sh"
+		  "order": 1,	
+          "cmd": "/opt/dockm/script/init-master.sh",
+		  "timeout": 300
         },
         "start": {
-          "cmd": "/opt/dockm/script/start-master.sh"
+		 "order": 1,
+         "cmd": "/opt/dockm/script/start-master.sh",
+		 "timeout": 300
         },
         "stop": {
-          "cmd": "/opt/dockm/script/stop-node.sh"
+		 "order": 1,
+         "cmd": "/opt/dockm/script/stop-node.sh",
+		 "timeout": 300
         },
         "destroy": {
+		  "order": 3,
           "nodes_to_execute_on": 1,
           "post_stop_service": true,
-          "cmd": "/opt/dockm/script/destroy-master.sh"
+          "cmd": "/opt/dockm/script/destroy-master.sh",
+		  "timeout": 300
         }
       },
       "health_check": {
@@ -48,33 +56,26 @@
       },
       "monitor": {
         "enable": true,
-        "cmd": "/opt/dockm/script/prom2json http://localhost:9323/metrics",
+        "cmd": "/opt/dockm/script/get-monitor.sh",
         "items": {
-          "engine_daemon_events_subscribers_total": {
-            "unit": "",
-            "value_type": "int",
-            "statistics_type": "latest",
-            "scale_factor_when_display": 0.001
+          "engine_daemon_container_states_containers_running": {
+          "unit": ""
           }
+	  
         },
-        "groups": {
-          "docker": [
-            "engine_daemon_events_subscribers_total"
-          ]
-        },
-        "display": [
-          "docker"
-        ],
-        "alarm": [
-          "engine_daemon_events_subscribers_total"
-        ]
+       "groups": {
+                   "engine_daemon_container_states_containers running": ["engine_daemon_container_states_containers_running"]
+               },
+        
+            "display": ["engine_daemon_container_states_containers_running"],
+			"alarm": ["engine_daemon_container_states_containers_running"]
       }
     },
     {
       "role": "node",
       "container": {
         "type": "kvm",
-        "image": "img-wp5arg70",
+        "image": "img-8d9k2dw1",
         "zone": "pek3a"
       },
       "instance_class": {{cluster.node.instance_class}},
@@ -90,18 +91,26 @@
       "vertical_scaling_policy": "sequential",
       "services": {
         "init": {
-          "cmd": "/opt/dockm/script/init-node.sh"
+		  "order": 1,
+          "cmd": "/opt/dockm/script/init-node.sh",
+		  "timeout": 300
         },
         "start": {
-          "cmd": "/opt/dockm/script/start-node.sh"
+		  "order": 3,
+          "cmd": "/opt/dockm/script/start-node.sh",
+		  "timeout": 300
         },
         "stop": {
-          "cmd": "/opt/dockm/script/stop-node.sh"
+		  "order": 3,
+          "cmd": "/opt/dockm/script/stop-node.sh",
+		  "timeout": 300
         },
         "destroy": {
+		  "order": 1,
           "nodes_to_execute_on": 1,
           "post_stop_service": false,
-          "cmd": "/opt/dockm/script/destroy-node.sh"
+          "cmd": "/opt/dockm/script/destroy-node.sh",
+		  "timeout": 86400
         }
       },
       "health_check": {
@@ -116,34 +125,23 @@
       },
       "monitor": {
         "enable": true,
-        "cmd": "/opt/dockm/script/prom2json http://localhost:9323/metrics",
+        "cmd": "/opt/dockm/script/get-monitor.sh",
         "items": {
-          "engine_daemon_events_subscribers_total": {
-            "unit": "",
-            "value_type": "int",
-            "statistics_type": "latest",
-            "scale_factor_when_display": 0.001
-          }
+          "engine_daemon_container_states_containers_running": {
+          "unit": ""
+          }   
         },
-        "groups": {
-          "docker": [
-           "engine_daemon_events_subscribers_total"
-          ]
-        },
-        "display": [
-          "docker"
-        ],
-        "alarm": [
-          "engine_daemon_events_subscribers_total"
-        ]
+       "groups": {
+                   "engine_daemon_container_states_containers running": ["engine_daemon_container_states_containers_running"]             
+               },
+        
+            "display": ["engine_daemon_container_states_containers_running"],
+			"alarm": ["engine_daemon_container_states_containers_running"]
       },
       "advanced_actions": [
-        "scale_horizontal"
+      "scale_horizontal"
       ]
     }
-  ],
-  "env": {
-    "access_key_id": {{env.access_key_id}},
-    "secret_access_key": {{env.secret_access_key}}
-  }
+  ]
+  
 }
