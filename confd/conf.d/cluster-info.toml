@@ -1,0 +1,6 @@
+[template]
+src = "cluster-info.tmpl"
+dest = "/opt/dockm/cluster-info"
+keys = [
+    "/",
+]
