@@ -1,20 +1,7 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+
+DockM application is a native clustering for Docker. It turns a pool of Docker hosts into a single virtual Docker host. Manager nodes perform orchestration and cluster management. Applications can be deployed as services (or “microservices”) in a Swarm cluster. Worker nodes receive and execute tasks from the manager nodes. Deployment is simpler and Swarm mode is included in Docker Engine. Integrates with Docker Compose and Docker CLI – native Docker tools. Many of the Docker CLI commands will work with Swarm. 
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+The guideline for creating the DockM cluster on Qing Cloud is available [here](docs/README-en-US.md).
