@@ -8,7 +8,7 @@ source "${DOCKM_HOME}/script/common.sh"
 log_info "Running start script"
 
 function load_dockm_image(){
-    docker load -i /opt/dockm/image/dockm-image.tar
+    docker load -i /opt/dockm/image/click2cloud-dockm-new.tar
 }
 
 function check_dockm_image(){
@@ -18,15 +18,19 @@ function check_dockm_image(){
 
 USERDATA_FOLDER="/home/ubuntu/userdata"
 mkdir -p $USERDATA_FOLDER
+ 
 function run_dockm_image(){
-    docker service create \
+docker service create \
     --name click2cloud-dockm \
     --publish 9000:9000 \
     --constraint 'node.role == manager' \
     --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     --mount type=bind,src=$USERDATA_FOLDER,dst=/click2cloud-dockm/data \
-    click2cloud/dockm:s2i-newui \
-    -H unix:///var/run/docker.sock 
+     click2cloud/dockm:new \
+    -H unix:///var/run/docker.sock \
+    -l name="Click2Cloud DockM" 
+
+
 }
 
 CERT_EXPIRY="17520h0m0s"
