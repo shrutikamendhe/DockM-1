@@ -170,6 +170,8 @@ Adjust the capacity for different nodes on the pop-up page.
 
 ![](screenshot/resizecluster.png)
 
+
 ## DockM tool user guide
 
 DockM tool user guide is available [here](https://click2cloud.com/en-us/products/dockm) 
+
