@@ -173,5 +173,5 @@ Adjust the capacity for different nodes on the pop-up page.
 
 ## DockM tool user guide
 
-DockM tool user guide is available [here](https://click2cloud.com/en-us/products/dockm) 
+DockM tool user guide is available [here](http://click2cloud.com/docs/products/dockm) 
 
