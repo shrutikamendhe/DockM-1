@@ -1,0 +1,183 @@
+{
+  "type": "array",
+  "properties": [
+    {
+      "key": "cluster",
+      "description": "DockM properties",
+      "type": "array",
+      "properties": [
+        {
+          "key": "name",
+          "label": "Name",
+          "description": "The name of the DockM cluster",
+          "type": "string",
+          "default": "DockM cluster",
+          "required": "yes"
+        },
+        {
+          "key": "description",
+          "label": "Description",
+          "description": "The description of DockM cluster",
+          "type": "string",
+          "default": "DockM cluster",
+          "required": "yes"
+        },
+        {
+          "key": "vxnet",
+          "label": "VxNet",
+          "description": "Choose a VxNet to join",
+          "type": "string",
+          "default": "",
+          "required": "yes"
+        },
+        {
+          "key": "master",
+          "label": "Master",
+          "description": "Swarm master properties",
+          "type": "array",
+          "properties": [
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 4,
+              "range": [
+                2,
+                4,
+                8
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "Memory of swarm master (in GB)",
+              "type": "integer",
+              "default": 2048,
+              "range": [
+                1024,
+                2048,
+                4096,
+                8192,
+                16384,
+                32768,
+                49152,
+                65536
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "count",
+              "label": "Count",
+              "description": "Number of master for the cluster to create",
+              "type": "integer",
+              "default": 1,
+              "min": 1,
+              "max": 1,
+              "required": "yes"
+            },
+            {
+              "key": "instance_class",
+              "label": "Resource type",
+              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "volume_size",
+              "label": "Volume size",
+              "description": "The volume size for each instance",
+              "type": "integer",
+              "default": 10,
+              "min": 10,
+              "max": 1000,
+              "step": 10,
+              "required": "yes"
+            }
+          ]
+        },
+        {
+          "key": "node",
+          "label": "Node",
+          "description": "Node properties",
+          "type": "array",
+          "properties": [
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 4,
+              "range": [
+                2,
+                4,
+                8,
+                12,
+                16
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "Memory of each node (in GB)",
+              "type": "integer",
+              "default": 4096,
+              "range": [
+                2048,
+                4096,
+                8192,
+                16384,
+                24576,
+                32768,
+                49152,
+                65536
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "count",
+              "label": "Count",
+              "description": "Number of nodes for the cluster to create",
+              "type": "integer",
+              "default": 2,
+              "min": 1,
+              "max": 1000,
+              "required": "yes"
+            },
+            {
+              "key": "instance_class",
+              "label": "Resource type",
+              "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "volume_size",
+              "label": "Volume size",
+              "description": "The volume size for each instance",
+              "type": "integer",
+              "default": 10,
+              "min": 10,
+              "max": 1000,
+              "step": 10,
+              "required": "yes"
+            }
+          ]
+        }
+      ]
+    }
+ 
+  ]
+}
