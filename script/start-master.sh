@@ -16,7 +16,7 @@ function check_dockm_image(){
     log_info "$docker_images"
 }
 
-USERDATA_FOLDER="/home/ubuntu/userdata"
+USERDATA_FOLDER="/data/dockm-data"
 mkdir -p $USERDATA_FOLDER
  
 function run_dockm_image(){

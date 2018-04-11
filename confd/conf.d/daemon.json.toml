@@ -1,0 +1,6 @@
+[template]
+src = "daemon.json.tmpl"
+dest = "/etc/docker/daemon.json"
+keys = [
+    "/",
+]
